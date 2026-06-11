@@ -1,0 +1,21 @@
+name: Keep Render Alive
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 每5分钟执行一次
+  workflow_dispatch:        # 允许手动触发
+
+jobs:
+  ping-both:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping fullstack-chat-app
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://fullstack-chat-app-kpg6.onrender.com/'
+          method: 'GET'
+
+      - name: Ping vue-gtd0
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://vue-gtd0.onrender.com'
+          method: 'GET'
